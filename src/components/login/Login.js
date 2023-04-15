@@ -17,7 +17,7 @@ const Login = () =>{
 
     const login = function (event) {
         event.preventDefault();
-        axios.post('http://localhost:8080/loginUser', {
+        axios.post('https://ewwe.onrender.com/loginUser', {
            email,password
         })
             .then((res) => {
@@ -30,7 +30,7 @@ const Login = () =>{
 
                  navigate(`/create`)
             }).catch((err) => {
-                errorToast(err.response.data.message + "" + " Error")//err.response.status
+                errorToast(err.response.data.message , "Error")//err.response.status
             })
     }
 

@@ -19,7 +19,7 @@ const Register = () =>{
 
     const register = function (event) {
         event.preventDefault();
-        axios.post('http://localhost:8080/createUser', {
+        axios.post('https://ewwe.onrender.com/createUser', {
            email,password,name,phone_number
         })
             .then((res) => {
@@ -29,7 +29,7 @@ const Register = () =>{
                 // localStorage.setItem("user_name", naam)
                  navigate('/')
             }).catch((err) => {
-                errorToast(err.response.data.message + ""  +"Error")//+ err.response.status+ " Error"
+                errorToast(err.response.data.message  , " Error")//+ err.response.status+ " Error"
             })
     }
 

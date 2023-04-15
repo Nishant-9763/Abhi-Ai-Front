@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useCallback} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from './Get.module.css'
@@ -19,28 +19,31 @@ const Get = () => {
     errorToast("please login first")
 
   }
-  function getUser() {
-    axios
-      .get(`https://ewwe.onrender.com/getImages`, {
-        headers: { Authorization: "Bearer " + token },
-      })
 
-      .then((res) => {
-        if (res.data.data.length === 0) {
-          successToast("No images to show ,Please create first");
-        }
-        // console.log(res.data.data);
-        
-        setUserData(res.data.data);
-      })
-      .catch((error) => {
-        errorToast(error.response.data.message + " Error");
-      });
-  }
+  const  getUser =useCallback( () => {
+
+      axios.get(`https://ewwe.onrender.com/getImages`, {
+          headers: { Authorization: "Bearer " + token },
+        })
+  
+        .then((res) => {
+          if (res.data.data.length === 0) {
+            successToast("No images to show Please create first");
+          }
+          // console.log(res.data.data);
+          
+          setUserData(res.data.data)
+        })
+        .catch((error) => {
+          errorToast(error.response.data.message + " Error");
+        });
+    },[token])
 
   useEffect(() => {
+
     getUser();
-  }, []);
+    
+  }, [getUser]);
 
   function deleteImage(id,imageId) {
     successToast(" Image deleted ");
