@@ -1,12 +1,11 @@
-
 import React ,{useState}from "react";
 import "./Login.css"
 import axios from "axios";
 import {useNavigate} from"react-router-dom"
 import {successToast,errorToast} from '../alert'
 
-const Login = () =>{
 
+const Login = () =>{
 
     const navigate = useNavigate()
 
@@ -17,7 +16,7 @@ const Login = () =>{
 
     const login = function (event) {
         event.preventDefault();
-        axios.post('https://ewwe.onrender.com/loginUser', {
+        axios.post(process.env.REACT_APP_LOGIN_API, { 
            email,password
         })
             .then((res) => {

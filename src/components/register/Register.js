@@ -15,18 +15,17 @@ const Register = () =>{
 
    
 
+    const url = process.env.REACT_APP_REGISTER_API
     
 
     const register = function (event) {
         event.preventDefault();
-        axios.post('https://ewwe.onrender.com/createUser', {
+        axios.post(url, { 
            email,password,name,phone_number
         })
             .then((res) => {
                 successToast(`Your registered Succesfully`)
-                // let naam = res.data.data.name
-                // // const token = res.data.token;
-                // localStorage.setItem("user_name", naam)
+               
                  navigate('/')
             }).catch((err) => {
                 errorToast(err.response.data.message  , " Error")//+ err.response.status+ " Error"

@@ -14,27 +14,28 @@ const Create = () => {
   let navigate = useNavigate()
   
   const [prompt,setPrompt] = useState('')
+  const [number_of_images,setNumber] = useState(0)
+  const [size,setSize]  = useState("")
   const [nishnat,setNishnat] = useState([])
   const [loading,setLoading] = useState(false)
   
   const token = localStorage.getItem("newKey")
 
-  
   if(!token){
     navigate('/')
     errorToast("please login first")
   
   }
+
+
     const createKaro = function (event) {
-
-
       setLoading(true)
       event.preventDefault()
-      
-      axios.post(`https://ewwe.onrender.com/createImage`,{prompt}, {'headers': {'Authorization': 'Bearer ' + token}})
+     
+      axios.post(process.env.REACT_APP_CREATE_API,{prompt,number_of_images,size}, {'headers': {'Authorization': 'Bearer ' + token}})
         .then((res) => {
           
-            // console.log(res.data.data.imageUrl);
+            // console.log(res.data.data)
             successToast("Ai generate images")
           setNishnat(res.data.data.imageUrl)
           setLoading(false)
@@ -45,12 +46,7 @@ const Create = () => {
         })
     }
    
-    // const routeChange = () =>{ 
-    //   let path = `/get`; 
-    //   navigate(path);
-    // }
-
-
+  
 
   return (
     <div className='divn'>
@@ -58,10 +54,9 @@ const Create = () => {
        <form onSubmit={createKaro}  className="form">
 
             <p className="h1">Descibe Your Text</p>
-            <input className="prompt" type="text" placeholder='Enter text' onChange={((e)=>setPrompt(e.target.value))} /> <br/><br/>
-
-            {/* <input placeholder='enter size' /> <br/> */}
-            {/* <button type="submit">Generate</button> */}
+            <input className="prompt" type="text" placeholder='Enter text' onChange={((e)=>setPrompt(e.target.value))} required /> <br/><br/>
+            <input className="prompt" type="text" placeholder='Enter size of images' onChange={((e)=>setSize(e.target.value))}required /> <br/><br/>
+            <input className="prompt" type="text" placeholder='Enter number of images' onChange={((e)=>setNumber(e.target.value))}required /> <br/><br/>
 
             {loading ? "":(<input className="battan" type="submit" placeholder="Generate" />)}
             {loading ? <div><Spinner className="spin" animation="border" variant="info" /> </div>: ""  }   <br />
@@ -69,8 +64,8 @@ const Create = () => {
         </form>
         <div id="createImg">
         
-           {nishnat.map(item=>
-                            <div className="column">
+           {nishnat.map((item,key)=>
+                            <div className="column" key={key}>
                       <div className="row">
                         <img id="im" src={item.url} alt="" />
                       </div>

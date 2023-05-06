@@ -28,11 +28,11 @@ function Header() {
 
           <Nav >
            
-            { token ?  "" :  <Nav.Link > <Link to="/" className="nav-link">Login</Link></Nav.Link> }
-            { token ?  "" :  <Nav.Link > <Link to="/register" className="nav-link">Register</Link></Nav.Link> }
-            { token ?   <Nav.Link > <Link to={`/create`} className="nav-link">Create Image</Link></Nav.Link> : "" }
-            { token ?   <Nav.Link > <Link to={`/get`} className="nav-link">Get Images</Link></Nav.Link>  :  "" }
-            { token ?   <Nav.Link onClick={logout} ><Link to="/" className="nav-link">Logout</Link> </Nav.Link>  :  "" }
+            { token ?  "" :  <Nav.Link href='#' > <Link to="/" className="nav-link">Login</Link></Nav.Link> }
+            { token ?  "" :  <Nav.Link  href='#'> <Link to="/register" className="nav-link">Register</Link></Nav.Link> }
+            { token ?   <Nav.Link  href='#'> <Link to={`/create`} className="nav-link">Create Image</Link></Nav.Link> : "" }
+            { token ?   <Nav.Link  href='#'> <Link to={`/get`} className="nav-link">Get Images</Link></Nav.Link>  :  "" }
+            { token ?   <Nav.Link href='#' onClick={logout} ><Link to="/" className="nav-link">Logout</Link> </Nav.Link>  :  "" }
 
           </Nav>
         </Navbar.Collapse>
